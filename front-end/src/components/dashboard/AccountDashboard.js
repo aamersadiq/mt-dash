@@ -24,11 +24,6 @@ function AccountDashboard() {
     setSelectedAccount(account);
   };
 
-  const handleLogout = () => {
-    dispatch(logout());
-    navigate('/login');
-  };
-
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toISOString().split('T')[0];
@@ -45,10 +40,7 @@ function AccountDashboard() {
 
   return (
     <div className="container mt-4">
-       <div className="d-flex justify-content-between align-items-center">
-        <h2>Account Dashboard</h2>
-        <button className="btn btn-danger" onClick={handleLogout}>Log Out</button>
-      </div>
+      <h2>Account Dashboard</h2>
       {hasAccountManageRole && (
             <button
               className="btn btn-primary mt-3"

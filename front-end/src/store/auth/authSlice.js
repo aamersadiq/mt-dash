@@ -8,12 +8,14 @@ const authSlice = createSlice({
     userId: null,
     token: null,
     roles: [],
+    isLoggedIn: false
   },
   reducers: {
     setUser(state, action) {
       state.userId = action.payload.userId;
       state.token = action.payload.token;
       state.roles = action.payload.roles;
+      state.isLoggedIn = true;
       sessionStorage.setItem('token', action.payload.token);
       sessionStorage.setItem('userId', action.payload.userId);
       sessionStorage.setItem('roles', JSON.stringify(action.payload.roles));
@@ -22,6 +24,7 @@ const authSlice = createSlice({
       state.userId = null;
       state.token = null;
       state.roles = [];
+      state.isLoggedIn = false;
       sessionStorage.removeItem('token');
       sessionStorage.removeItem('userId');
       sessionStorage.removeItem('roles');
