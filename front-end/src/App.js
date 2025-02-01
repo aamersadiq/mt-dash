@@ -1,11 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import Header from './core/Header';
-import Footer from './core/Footer';
+import Header from './common/Header';
+import Footer from './common/Footer';
 import Login from './components/login/Login';
 import AccountDashboard from './components/dashboard/AccountDashboard';
 import Transfer from './components/transfer/Transfer';
+import PrivateRoute from './common/PrivateRoute';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -20,6 +21,10 @@ function App() {
             <Route path="/" element={<Navigate to="/login" />} />
             <Route path="/login" element={<Login />} />
             <Route path="/dashboard" element={token ? <AccountDashboard /> : <Navigate to="/login" />} />
+            <Route
+              path="/transfer"
+              element={<PrivateRoute element={Transfer} roles={['AccountManage']} />}
+            />
             <Route path="/transfer" element={token ? <Transfer /> : <Navigate to="/login" />} />
             <Route path="*" element={<Navigate to="/login" />} />
           </Routes>
