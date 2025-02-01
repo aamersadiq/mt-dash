@@ -1,25 +1,54 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { transferAmount } from '../..//store/account/accountSlice';
+import { transferAmount } from '../../store/account/accountSlice';
 import { useNavigate } from 'react-router-dom';
 
 function Transfer() {
   const dispatch = useDispatch();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const accounts = useSelector((state) => state.account.accounts);
   const [fromAccountId, setFromAccountId] = useState('');
   const [toAccountId, setToAccountId] = useState('');
   const [amount, setAmount] = useState('');
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
-  const handleTransfer = (e) => {
+  const handleTransfer = async (e) => {
     e.preventDefault();
-    dispatch(transferAmount(fromAccountId, toAccountId, parseFloat(amount)));
+    if (!fromAccountId) {
+      setError('Please select a From Account.');
+      return;
+    }
+    if (!toAccountId) {
+      setError('Please select a To Account.');
+      return;
+    }
+    if (fromAccountId === toAccountId) {
+      setError('From Account and To Account cannot be the same.');
+      return;
+    }
+    if (!amount || parseFloat(amount) <= 0) {
+      setError('Please enter a valid amount greater than 0.');
+      return;
+    }
+    setError('');
+    try {
+      await dispatch(transferAmount(fromAccountId, toAccountId, parseFloat(amount)));
+      setSuccess('Transfer successful.');
+      setFromAccountId('');
+      setToAccountId('');
+      setAmount('');
+    } catch (err) {
+      setError('Transfer failed. Please try again.');
+    }
   };
 
   return (
-    <div className="container">
+    <div className="container mt-4">
       <h2>Transfer Between Accounts</h2>
-      <form onSubmit={handleTransfer}>
+      {error && <div className="alert alert-danger mt-3">{error}</div>}
+      {success && <div className="alert alert-success mt-3">{success}</div>}
+      <form onSubmit={handleTransfer} className="mt-4">
         <div className="form-group">
           <label>From Account</label>
           <select
@@ -63,7 +92,7 @@ function Transfer() {
       </form>
       <button className="btn btn-secondary mt-3" onClick={() => navigate('/dashboard')}>
         Back to Dashboard
-      </button> 
+      </button>
     </div>
   );
 }
