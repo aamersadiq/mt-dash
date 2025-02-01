@@ -1,0 +1,29 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+  }
+  
+  .login-form {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+  }
+  
+  .btn-block {
+    display: block;
+    width: 100%;
+  }
+  
+  .float-right {
+    float: right;
+  }
+  
+  .mt-3 {
+    margin-top: 1rem;
+  }
+  
