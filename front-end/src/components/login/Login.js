@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { login } from '../features/auth/authSlice';
+import { login } from '../../store/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Login.css';
@@ -31,11 +31,6 @@ function Login() {
 
   return (
     <div>
-      <nav className="navbar navbar-light bg-light">
-        <a className="navbar-brand" href="#">
-          Bank Dashboard
-        </a>
-      </nav>
       <div className="login-container">
         <div className="login-form">
           <h2>Login</h2>

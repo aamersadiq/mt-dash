@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { transferAmount } from '../features/account/accountSlice';
+import { transferAmount } from '../..//store/account/accountSlice';
 import { useNavigate } from 'react-router-dom';
 
 function Transfer() {

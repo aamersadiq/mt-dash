@@ -31,7 +31,6 @@ export const transferAmount = (fromAccountId, toAccountId, amount) => async (dis
       toAccountId,
       amount,
     });
-    // Refresh accounts after transfer
     dispatch(fetchAccounts(sessionStorage.getItem('userId')));
   } catch (error) {
     console.error('Transfer failed', error);
