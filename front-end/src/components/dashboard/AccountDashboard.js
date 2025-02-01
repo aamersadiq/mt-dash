@@ -44,12 +44,20 @@ function AccountDashboard() {
   };
 
   return (
-    <div className="container">
+    <div className="container mt-4">
        <div className="d-flex justify-content-between align-items-center">
         <h2>Account Dashboard</h2>
         <button className="btn btn-danger" onClick={handleLogout}>Log Out</button>
       </div>
-      <div className="list-group">
+      {hasAccountManageRole && (
+            <button
+              className="btn btn-primary mt-3"
+              onClick={() => navigate('/transfer')}
+            >
+              Transfer Between Accounts
+            </button>
+          )}
+      <div className="list-group mt-4">
         {accounts.map((account) => (
           <div key={account.id} className="list-group-item">
             <div className="d-flex justify-content-between align-items-center">
@@ -76,14 +84,6 @@ function AccountDashboard() {
               </li>
             ))}
           </ul>
-          {hasAccountManageRole && (
-            <button
-              className="btn btn-primary mt-3"
-              onClick={() => navigate('/transfer')}
-            >
-              Transfer Between Accounts
-            </button>
-          )}
         </div>
       )}
     </div>
