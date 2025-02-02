@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAccounts } from '../../store/account/accountSlice';
 import { useNavigate } from 'react-router-dom';
-import { logout } from '../..//store/auth/authSlice';
 
 function AccountDashboard() {
   const dispatch = useDispatch();
