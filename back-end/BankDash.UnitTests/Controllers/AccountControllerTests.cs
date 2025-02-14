@@ -1,12 +1,11 @@
 ﻿
-using BankDash.Api.Controllers.BankDash.Controllers;
+using BankDash.Api.Controllers;
 using BankDash.Model.Dto;
 using BankDash.Model.Enitity;
 using BankDash.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
-using Xunit.Sdk;
 
 namespace BankDash.UnitTests.Controllers
 {
