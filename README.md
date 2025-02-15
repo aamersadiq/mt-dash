@@ -8,6 +8,25 @@ Once the application is up and running, you can:
 - View the dashboard to see account balances and transactions
 - Transfer funds between accounts
 
+# Setup
+
+You can complete the setup and run the application from the command line on both Windows and Mac (though it hasn't been tested on Mac). Make sure all prerequisites are installed beforehand.
+
+## Database
+
+SQL Server Experss Edition database
+
+### Prerequesites
+
+- Docker version 4.38.0 running Linux containers
+- SQL Server Management Studio
+
+### Available Scripts
+
+#### Run the SQL Server Express in docker using PowerShell or Bash
+
+`docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=MyPass@word" -e "MSSQL_PID=Express" -p 1439:1433 -d --name=sql mcr.microsoft.com/mssql/server:latest`
+
 ## .Net Core 8 Web API (back-end folder)
 
 API to login, view accounts and their transactions.
@@ -16,9 +35,6 @@ API to login, view accounts and their transactions.
 
 - .Net Core 8
 - Visual Studio for editing files
-- SQL Server Express Edition
-- SQL Server Management Studio
-- Update DefaultConnection connection string in appSetting.json to point to SQL Server instance
 
 ### Available Scripts
 
@@ -50,7 +66,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ### Available Scripts
 
-#### In the front-end directory, you can run:
+#### From the repository root folder, you can run using PowerShell or Bash:
 
 `cd front-end`
 
