@@ -26,17 +26,17 @@ From the repository root folder, you can run using PowerShell or Bash (replace f
 
 #### Runs the unit tests
 
-#### `dotnet test back-end\BankDash.UnitTests`
+`dotnet test back-end\BankDash.UnitTests`
 
-### Creates the database and tables along with seed data.
+#### Creates the database and tables along with seed data.
 
-#### `dotnet tool install --global dotnet-ef --version 8.\*`
+`dotnet tool install --global dotnet-ef --version 8.\*`
 
-#### `dotnet ef database update --project back-end\BankDash.Db\BankDash.Db.csproj --startup-project back-end\BankDash.Api/BankDash.Api.csproj`
+`dotnet ef database update --project back-end\BankDash.Db\BankDash.Db.csproj --startup-project back-end\BankDash.Api/BankDash.Api.csproj`
 
 #### Runs the API. Swagger url: https://localhost:7008/swagger/index.html
 
-#### `dotnet run --project back-end\BankDash.Api/BankDash.Api.csproj`
+`dotnet run --project back-end\BankDash.Api/BankDash.Api.csproj`
 
 ## React app (front-end folder)
 
@@ -50,19 +50,19 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ### Available Scripts
 
-In the front-end directory, you can run:
+#### In the front-end directory, you can run:
 
-#### `cd front-end`
+`cd front-end`
 
-#### `npm install`
+`npm install`
 
-#### `npm start`
+`npm start`
 
 Runs the app in the development mode.
 
 - Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 - Log in using username/password of account-holder/account-holder@123
 
-### `npm test`
+#### Run the tests
 
-Run the tests
+`npm test`
