@@ -1,5 +1,6 @@
 ﻿using BankDash.Api.Controllers;
 using BankDash.Model.Dto;
+using BankDash.Model.Enitity;
 using BankDash.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -54,7 +55,39 @@ namespace BankDash.UnitTests.Controllers
             // Assert
             Assert.NotNull(result);
             Assert.Equal(401, result.StatusCode);
-            Assert.Equal(errorMessage, result.Value);
+            Assert.Equal(errorMessage, result.Value.GetType().GetProperty("message").GetValue(result.Value, null));
+        }
+
+        [Fact]
+        public async Task Register_ValidUser_ShouldReturnOk()
+        {
+            // Arrange
+            var register = new Register { Username = "testuser", Password = "password" };
+            var user = new User { Username = "testuser" };
+            _userServiceMock.Setup(u => u.RegisterUserAsync(register)).ReturnsAsync(user);
+
+            // Act
+            var result = await _authController.Register(register);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            Assert.Equal(user, okResult.Value);
+        }
+
+        [Fact]
+        public async Task Register_UserExists_RegistrationFails()
+        {
+            // Arrange
+            var register = new Register { Username = "testuser", Password = "password" };
+            _userServiceMock.Setup(u => u.RegisterUserAsync(register)).ThrowsAsync(new Exception("User already exists"));
+
+            // Act
+            var result = await _authController.Register(register);
+
+            // Assert
+            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
+            Assert.Equal("User already exists", badRequestResult.Value.GetType().GetProperty("message").GetValue(badRequestResult.Value, null));
+
         }
     }
 }

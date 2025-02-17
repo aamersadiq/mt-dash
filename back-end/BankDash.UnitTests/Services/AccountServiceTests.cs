@@ -99,7 +99,7 @@ namespace BankDash.UnitTests.Services
             var toAccountId = 2;
             var amount = 100;
 
-            _accountRepositoryMock.Setup(repo => repo.GetAccountByIdAsync(fromAccountId)).ReturnsAsync((Account) null);
+            _accountRepositoryMock.Setup(repo => repo.GetAccountByIdAsync(fromAccountId)).ReturnsAsync((Account)null);
 
             // Act & Assert
             var exception = await Assert.ThrowsAsync<Exception>(() => _accountService.TransferAmountAsync(fromAccountId, toAccountId, amount));

@@ -56,7 +56,7 @@ namespace BankDash.UnitTests.Controllers
             // Assert
             Assert.NotNull(result);
             Assert.Equal(200, result.StatusCode);
-            Assert.Equal("Transfer successful", result.Value);
+            Assert.Equal("Transfer successful", result.Value.GetType().GetProperty("message").GetValue(result.Value, null));
             _accountServiceMock.Verify(service => service.TransferAmountAsync(transfer.FromAccountId, transfer.ToAccountId, transfer.Amount), Times.Once);
         }
 
