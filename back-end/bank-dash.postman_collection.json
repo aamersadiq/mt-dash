@@ -1,0 +1,139 @@
+{
+	"info": {
+		"_postman_id": "b5401a91-acca-4e87-963d-058628780184",
+		"name": "bank-dash",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18629029"
+	},
+	"item": [
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"account-holder\",\r\n  \"password\": \"account-holder@123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7008/api/auth/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7008",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJyb2xlIjpbIkFjY291bnRSZWFkIiwiQWNjb3VudE1hbmFnZSJdLCJuYmYiOjE3Mzk3NjQzMTgsImV4cCI6MTc0MDM2OTExOCwiaWF0IjoxNzM5NzY0MzE4fQ.ZAcn31ADkg0YBRPw7yznc_kbQ9s_dnU-lZdsxbgjVpE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7008/api/account/user/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7008",
+					"path": [
+						"api",
+						"account",
+						"user",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "transfer",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJyb2xlIjpbIkFjY291bnRSZWFkIiwiQWNjb3VudE1hbmFnZSJdLCJuYmYiOjE3Mzk3NjQzMTgsImV4cCI6MTc0MDM2OTExOCwiaWF0IjoxNzM5NzY0MzE4fQ.ZAcn31ADkg0YBRPw7yznc_kbQ9s_dnU-lZdsxbgjVpE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"fromAccountId\": \"1\",\r\n  \"toAccountId\": \"2\",\r\n  \"amount\": \"0\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7008/api/account/transfer",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7008",
+					"path": [
+						"api",
+						"account",
+						"transfer"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

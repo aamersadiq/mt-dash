@@ -33,7 +33,7 @@ namespace BankDash.Api.Controllers
             try
             {
                 await _accountService.TransferAmountAsync(transfer.FromAccountId, transfer.ToAccountId, transfer.Amount);
-                return Ok("Transfer successful");
+                return Ok(new { message = "Transfer successful" });
             }
             catch (Exception ex)
             {

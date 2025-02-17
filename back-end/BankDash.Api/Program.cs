@@ -1,5 +1,7 @@
 
 using System.Text;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 using BankDash.Db.Repositories;
 using BankDash.Db.Repositories.Interfaces;
 using BankDash.Service;
@@ -80,6 +82,12 @@ namespace BankDash.Api
             app.UseAuthorization();
 
             app.MapControllers();
+
+            JsonSerializerOptions options = new()
+            {
+                ReferenceHandler = ReferenceHandler.Preserve,
+                WriteIndented = true
+            };
 
             app.Run();
         }

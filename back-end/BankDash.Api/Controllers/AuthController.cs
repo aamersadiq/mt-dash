@@ -17,13 +17,6 @@ namespace BankDash.Api.Controllers
             _logger = logger;
         }
 
-        [HttpPost("register")]
-        public async Task<IActionResult> Register(Register register)
-        {
-            var user = await _userService.RegisterUserAsync(register);
-            return Ok(user);
-        }
-
         [HttpPost("login")]
         public async Task<IActionResult> Login(Login login)
         {

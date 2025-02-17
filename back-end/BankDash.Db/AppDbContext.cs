@@ -32,11 +32,6 @@ public class AppDbContext : DbContext
             .WithMany(u => u.Accounts)
             .HasForeignKey(a => a.UserId);
 
-        //modelBuilder.Entity<Transaction>()
-        //    .HasOne(t => t.Account)
-        //    .WithMany(a => a.Transactions)
-        //    .HasForeignKey(t => t.AccountId);
-
         // Seed Roles
         var accountRead = new Role { Id = 1, Name = RoleType.AccountRead.ToString() };
         var accountManage = new Role { Id = 2, Name = RoleType.AccountManage.ToString() };
