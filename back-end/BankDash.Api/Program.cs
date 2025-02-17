@@ -83,12 +83,6 @@ namespace BankDash.Api
 
             app.MapControllers();
 
-            JsonSerializerOptions options = new()
-            {
-                ReferenceHandler = ReferenceHandler.Preserve,
-                WriteIndented = true
-            };
-
             app.Run();
         }
     }
