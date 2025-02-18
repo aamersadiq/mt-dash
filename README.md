@@ -50,14 +50,13 @@ From the repository root folder, you can run using PowerShell or Bash (replace f
 
 `dotnet ef database update --project back-end\BankDash.Db\BankDash.Db.csproj --startup-project back-end\BankDash.Api/BankDash.Api.csproj`
 
-#### Runs the API. Swagger url: https://localhost:7008/swagger/index.html
+#### Runs the API. Swagger url: https://localhost:7008/swagger/index.html. Postman collection back-end/bank-dash.postman_collection.json
 
 `dotnet run --project back-end\BankDash.Api/BankDash.Api.csproj`
 
 ## React app (front-end folder)
 
 Web app for login, view accounts and their transactions.
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ### Prerequesites
 
