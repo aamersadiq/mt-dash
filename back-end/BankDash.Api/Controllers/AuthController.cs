@@ -20,31 +20,15 @@ namespace BankDash.Api.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(Register register)
         {
-            try
-            {
-                var user = await _userService.RegisterUserAsync(register);
-                return Ok(user);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Registeration failed from user {register.Username}");
-                return BadRequest(new { message = ex.Message });
-            }
+            var user = await _userService.RegisterUserAsync(register);
+            return Ok(user);
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login(Login login)
         {
-            try
-            {
-                var token = await _userService.LoginUserAsync(login);
-                return Ok(new { Token = token });
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                _logger.LogError($"Login denied for {login.Username}");
-                return Unauthorized(new { message = ex.Message });
-            }
+            var token = await _userService.LoginUserAsync(login);
+            return Ok(new { Token = token });
         }
     }
 }

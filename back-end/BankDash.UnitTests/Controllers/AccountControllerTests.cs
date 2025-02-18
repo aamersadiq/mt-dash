@@ -3,6 +3,7 @@ using BankDash.Api.Controllers;
 using BankDash.Model.Dto;
 using BankDash.Model.Enitity;
 using BankDash.Service.Interfaces;
+using BankDash.UnitTests.Util;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
@@ -56,27 +57,8 @@ namespace BankDash.UnitTests.Controllers
             // Assert
             Assert.NotNull(result);
             Assert.Equal(200, result.StatusCode);
-            Assert.Equal("Transfer successful", result.Value.GetType().GetProperty("message").GetValue(result.Value, null));
+            Assert.Equal("Transfer successful", JsonValueHelper.GetValue(result?.Value, "message"));
             _accountServiceMock.Verify(service => service.TransferAmountAsync(transfer.FromAccountId, transfer.ToAccountId, transfer.Amount), Times.Once);
-        }
-
-        [Fact]
-        public async Task TransferAmount_InvalidTransfer_ReturnBadRequest()
-        {
-            // Arrange
-            var transfer = new Transfer { FromAccountId = 1, ToAccountId = 2, Amount = 100 };
-            var errorMessage = "Insufficent funds.";
-
-            _accountServiceMock.Setup(service => service.TransferAmountAsync(transfer.FromAccountId, transfer.ToAccountId, transfer.Amount))
-                               .ThrowsAsync(new Exception(errorMessage));
-
-            // Act
-            var result = await _accountController.TransferAmount(transfer) as BadRequestObjectResult;
-
-            // Assert
-            Assert.NotNull(result);
-            Assert.Equal(400, result.StatusCode);
-            Assert.Equal(errorMessage, result.Value.GetType().GetProperty("message").GetValue(result.Value, null));
         }
     }
 }

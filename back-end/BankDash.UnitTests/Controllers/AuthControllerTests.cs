@@ -2,6 +2,7 @@
 using BankDash.Model.Dto;
 using BankDash.Model.Enitity;
 using BankDash.Service.Interfaces;
+using BankDash.UnitTests.Util;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
@@ -36,26 +37,8 @@ namespace BankDash.UnitTests.Controllers
             // Assert
             Assert.NotNull(result);
             Assert.Equal(200, result.StatusCode);
-            Assert.Equal(token, result.Value.GetType().GetProperty("Token").GetValue(result.Value, null));
+            Assert.Equal(token, JsonValueHelper.GetValue(result?.Value, "Token"));
             _userServiceMock.Verify(service => service.LoginUserAsync(login), Times.Once);
-        }
-
-        [Fact]
-        public async Task Login_UnauthorizedAccessExceptionThrown_ReturnUnauthorized()
-        {
-            // Arrange
-            var login = new Login { Username = "test-user", Password = "password" };
-            var errorMessage = "Invalid username or password.";
-
-            _userServiceMock.Setup(service => service.LoginUserAsync(login)).ThrowsAsync(new UnauthorizedAccessException(errorMessage));
-
-            // Act
-            var result = await _authController.Login(login) as UnauthorizedObjectResult;
-
-            // Assert
-            Assert.NotNull(result);
-            Assert.Equal(401, result.StatusCode);
-            Assert.Equal(errorMessage, result.Value.GetType().GetProperty("message").GetValue(result.Value, null));
         }
 
         [Fact]
@@ -72,22 +55,6 @@ namespace BankDash.UnitTests.Controllers
             // Assert
             var okResult = Assert.IsType<OkObjectResult>(result);
             Assert.Equal(user, okResult.Value);
-        }
-
-        [Fact]
-        public async Task Register_UserExists_RegistrationFails()
-        {
-            // Arrange
-            var register = new Register { Username = "testuser", Password = "password" };
-            _userServiceMock.Setup(u => u.RegisterUserAsync(register)).ThrowsAsync(new Exception("User already exists"));
-
-            // Act
-            var result = await _authController.Register(register);
-
-            // Assert
-            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
-            Assert.Equal("User already exists", badRequestResult.Value.GetType().GetProperty("message").GetValue(badRequestResult.Value, null));
-
         }
     }
 }

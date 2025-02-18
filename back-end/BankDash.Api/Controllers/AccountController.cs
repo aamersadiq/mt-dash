@@ -30,16 +30,8 @@ namespace BankDash.Api.Controllers
         [HttpPost("transfer")]
         public async Task<IActionResult> TransferAmount([FromBody] Transfer transfer)
         {
-            try
-            {
-                await _accountService.TransferAmountAsync(transfer.FromAccountId, transfer.ToAccountId, transfer.Amount);
-                return Ok(new { message = "Transfer successful" });
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Transfer failed from account {transfer.FromAccountId} to account {transfer.ToAccountId}");
-                return BadRequest(new { message = ex.Message });
-            }
+            await _accountService.TransferAmountAsync(transfer.FromAccountId, transfer.ToAccountId, transfer.Amount);
+            return Ok(new { message = "Transfer successful" });
         }
     }
 }
